@@ -6,16 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public  class Customer : Entity<Guid>
-{
-    public Customer()
-    {
+//public  class Customer : Entity<Guid>
+//{
+//    public Customer(IndividualCustomer customer)
+//    {
+//        IndividualCustomer = customer;
+//    }
+//    public Customer(CorporateCustomer customer)
+//    {
+//        CorporateCustomer = customer;
+//    }
+//    public Customer()
+//    {
         
-    }
-    public Customer(Guid userId)
-    {
-        UserId = userId;
-    }
-    public Guid UserId { get; set; }
-    //public User User { get; set; }
-}
+//    }
+//    //public Guid UserId { get; set; }
+
+//    public CorporateCustomer CorporateCustomer { get; set; }
+//    public IndividualCustomer IndividualCustomer { get; set; }
+
+//}

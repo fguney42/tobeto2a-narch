@@ -1,4 +1,5 @@
 ﻿using Application.Services.Repositories;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
         services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<ICarRepository,CarRepository>();
-
+        services.AddScoped<ICorporateCustomerRepository,CorporateCustomerRepository>();
         return services;
     }
 }
