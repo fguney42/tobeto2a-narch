@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 namespace Application.Features.Cars.Commands.Create;
 public class CreateCarCommand : IRequest<CreatedCarResponse>
 {
-    public int ColorId { get; set; }
-    public string BrandName { get; set; }
-    public string ColorName { get; set; }
+    private int ColorId { get; set; }
+    public string? BrandName { get; set; }
+    public string? ColorName { get; set; }
     public int CarState { get; set; }
     public int Kilometer { get; set; }
     public short ModelYear { get; set; }
-    public string Plate { get; set; }
-    public string ModelName { get; set; }
+    public string? Plate { get; set; }
+    public string? ModelName { get; set; }
     public Guid ModelId { get; set; }
 
     public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, CreatedCarResponse>

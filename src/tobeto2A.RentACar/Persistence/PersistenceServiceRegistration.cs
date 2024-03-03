@@ -11,7 +11,7 @@ namespace Persistence;
 
 public static class PersistenceServiceRegistration
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration) // Configuration Db'ayarlamak için //Development.Json//
     {
         services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("BaseDb")));
         services.AddDbMigrationApplier(buildServices => buildServices.GetRequiredService<BaseDbContext>());
@@ -25,6 +25,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<ICarRepository,CarRepository>();
         services.AddScoped<ICorporateCustomerRepository,CorporateCustomerRepository>();
+        services.AddScoped<IIndividualCustomerRepository,IndividualCustomerRepository>();
         return services;
     }
 }

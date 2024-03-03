@@ -22,7 +22,7 @@ public class CorporateCustomerBusinessRules : BaseBusinessRules
             (ccr=>ccr.TaxNo.Equals(taxNo)) is not  null;
         if (isExists)
             throw new BusinessException
-                (CustomerMessages.TaxNoExists);
+                (CorporateCustomerMessages.CorporateCustomerTaxNoAlreadyExists);
         return;
     }
     public async Task CheckIfEmailNotExists(string email)
@@ -30,7 +30,7 @@ public class CorporateCustomerBusinessRules : BaseBusinessRules
         bool isExists = this._corporateCustomerRepository.Get
           (ccr => ccr.Email.Equals(email)) is not null;
         if (isExists)
-            throw new BusinessException(CustomerMessages.EmailExists);
+            throw new BusinessException(CorporateCustomerMessages.CorporateCustomerMailAlreadyExists);
         return;
     }
 }

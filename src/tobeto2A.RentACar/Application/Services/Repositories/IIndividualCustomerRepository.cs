@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Services.Repositories;
-public interface IInvidividualCustomerRepository : IAsyncRepository<IndividualCustomer, Guid>, IRepository<IndividualCustomer, Guid>
+public interface IIndividualCustomerRepository : IAsyncRepository<IndividualCustomer, Guid>, IRepository<IndividualCustomer, Guid>
 {
+
 }

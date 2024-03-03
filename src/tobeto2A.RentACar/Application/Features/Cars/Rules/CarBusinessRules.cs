@@ -24,7 +24,7 @@ public class CarBusinessRules :BaseBusinessRules
         bool result = _carRepository.Get(cr=>cr.Id.Equals(command.Plate)) != null;
         if (result)
         {
-            throw new BusinessException(CarMessages.CarNotExits);
+            throw new BusinessException(CarMessages.CarAlreadyExists);
         }
         return;
     }

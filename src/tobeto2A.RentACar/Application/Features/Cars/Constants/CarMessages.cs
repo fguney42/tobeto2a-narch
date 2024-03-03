@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Application.Features.Cars.Constants;
 public static class CarMessages
 {
-    public const string CarNotExits = "Böyle bir araç yok.";
+    public const string CarAlreadyExists = "Bu araçtan zaten bulunuyor";
 }

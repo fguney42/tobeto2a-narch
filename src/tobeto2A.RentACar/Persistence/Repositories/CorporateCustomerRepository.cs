@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Persistence.Repositories;
-public class CustomerRepository : 
-    EfRepositoryBase<Customer, Guid, BaseDbContext>, ICustomerRepository
+public class CorporateCustomerRepository :
+    EfRepositoryBase<CorporateCustomer, Guid, BaseDbContext>, ICorporateCustomerRepository
 {
-    public CustomerRepository(BaseDbContext context) : base(context)
+    public CorporateCustomerRepository(BaseDbContext context) : base(context)
     {
 
     }

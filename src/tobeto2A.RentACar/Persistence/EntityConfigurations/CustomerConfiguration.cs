@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Persistence.EntityConfigurations;
-public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
-{
-    public void Configure(EntityTypeBuilder<Customer> builder)
-    {
-        builder.HasKey(i=>i.Id);
-        builder.ToTable("Customers");
-    }
-}
+//public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+//{
+//    public void Configure(EntityTypeBuilder<Customer> builder)
+//    {
+//        builder.HasKey(i=>i.Id);
+//        builder.ToTable("Customers");
+//    }
+//}
