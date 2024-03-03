@@ -10,7 +10,7 @@ public class CorporateCustomer : Entity<Guid>
 {
     public string Name { get; set; }
     public string TaxNo { set; get; }
-    Customer customer { set; get; }
+    //Customer customer { set; get; }
     public CorporateCustomer()
     {
         

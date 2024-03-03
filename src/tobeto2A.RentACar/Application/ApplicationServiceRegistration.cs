@@ -43,9 +43,10 @@ public static class ApplicationServiceRegistration
             configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
         });
 
-        services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
-
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules)); 
+        // Assembly'den alıyor. Business Rules'den tureyenlerin Referansını oluştur. // Special Method //
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); 
+        //Validator'lerin Referansını oluşturuyor.
 
         services.AddSingleton<IMailService, MailKitMailService>(_ => new MailKitMailService(mailSettings));
         services.AddSingleton<ILogger, SerilogFileLogger>(_ => new SerilogFileLogger(fileLogConfiguration));

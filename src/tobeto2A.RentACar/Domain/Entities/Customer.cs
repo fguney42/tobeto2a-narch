@@ -12,10 +12,10 @@ public  class Customer : Entity<Guid>
     {
         
     }
-    public Customer(int userId)
+    public Customer(Guid userId)
     {
         UserId = userId;
     }
-    public int UserId { get; set; }
-    public User User { get; set; }
+    public Guid UserId { get; set; }
+    //public User User { get; set; }
 }
