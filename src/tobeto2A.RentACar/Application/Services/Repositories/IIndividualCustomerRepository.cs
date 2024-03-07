@@ -9,5 +9,4 @@ using System.Threading.Tasks;
 namespace Application.Services.Repositories;
 public interface IIndividualCustomerRepository : IAsyncRepository<IndividualCustomer, Guid>, IRepository<IndividualCustomer, Guid>
 {
-
 }

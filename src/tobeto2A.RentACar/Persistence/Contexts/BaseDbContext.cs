@@ -20,7 +20,7 @@ public class BaseDbContext : DbContext
     public DbSet<IndividualCustomer> IndividualCustomers { get; set; }
     //public DbSet<Customer> Customers { get; set; }
     public DbSet<Fuel> Fuels { get; set; }
-    
+
     public DbSet<Model> Models { get; set; }
 
 

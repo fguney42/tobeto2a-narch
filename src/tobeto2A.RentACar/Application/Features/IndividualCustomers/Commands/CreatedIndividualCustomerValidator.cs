@@ -10,7 +10,7 @@ public class CreatedIndividualCustomerValidator : AbstractValidator<CreateIndivi
 {
     public CreatedIndividualCustomerValidator()
     {
-        RuleFor(cic=>cic.Email).NotEmpty().NotNull();
+        RuleFor(cic=>cic.Email).NotEmpty().NotNull(); // input alakalı //
         RuleFor(cic=>cic.NationalIdentity).NotEmpty().NotNull();
         RuleFor(cic=>cic.Password).NotEmpty().NotNull();
         RuleFor(cic=>cic.FirstName).NotEmpty().NotNull();

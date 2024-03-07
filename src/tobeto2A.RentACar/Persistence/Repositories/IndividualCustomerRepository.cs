@@ -1,7 +1,6 @@
 ﻿using Application.Services.Repositories;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Repositories;
-using Nest;
 using Persistence.Contexts;
 using System;
 using System.Collections.Generic;
@@ -14,6 +13,7 @@ public class IndividualCustomerRepository : EfRepositoryBase<IndividualCustomer,
 {
     public IndividualCustomerRepository(BaseDbContext context) : base(context)
     {
-
+        return;
+        
     }
 }

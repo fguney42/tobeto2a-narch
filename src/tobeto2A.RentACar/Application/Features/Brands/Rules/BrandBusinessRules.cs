@@ -21,9 +21,10 @@ public class BrandBusinessRules : BaseBusinessRules
 
     public async Task CarShouldNotExistsWithSameName(string name)
     {
-        Brand? brandWithSameName = await _brandRepository.GetAsync(b=>b.Name == name);
+        Brand? brandWithSameName = await _brandRepository.GetAsync(b=>b.Name == name); 
         if (brandWithSameName is not null)
-            throw new BusinessException
-                (BrandMessages.BrandNameNotExists);
+            throw new 
+                BusinessException
+                (BrandsMessages.BrandNameAlreadyExists);
     }
 }

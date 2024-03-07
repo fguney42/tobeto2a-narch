@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Enums;
-public  enum CarStatus
+public enum CarStatus
 {
-    Available,
-    Rented,
-    OnService
+    Available=0,
+    Rented=1,
+    OnService=2
 }

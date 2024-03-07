@@ -19,6 +19,10 @@ using NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
+//using Application.Services.Models;
+using NArchitecture.Core.Application.Pipelines.Performance;
+using System.Diagnostics;
+using Application.Services.Models;
 
 namespace Application;
 
@@ -32,20 +36,26 @@ public static class ApplicationServiceRegistration
     )
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddScoped<Stopwatch>(); // Perfomance for requirement // 
         services.AddMediatR(configuration =>
         {
-            configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); //
-            configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
+            configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); // Services
+            configuration.AddOpenBehavior(typeof(PerformanceBehavior<,>));//
+            // Davranışlar birbirlerini next() olarak çağırır //
+            configuration.AddOpenBehavior(typeof(LoggingBehavior<,>)); // Logging //
+            configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>)); 
+            // Bunlara veri type'ını veren kısım neresi  IPipelineBehavior'dan Geliyor ??
+            //  Implemente ettiğimizde bu configurasyonu yaptığımız için handle metotu çalışacak // ??
             configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
             configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
-            configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
             configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
             configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
+            //
         });
 
-        services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules)); 
+        services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
         // Assembly'den alıyor. Business Rules'den tureyenlerin Referansını oluştur. // Special Method //
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); 
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         //Validator'lerin Referansını oluşturuyor.
 
         services.AddSingleton<IMailService, MailKitMailService>(_ => new MailKitMailService(mailSettings));
@@ -60,6 +70,8 @@ public static class ApplicationServiceRegistration
 
         services.AddSecurityServices<Guid, int>();
 
+        services.AddScoped<IModelService, ModelManager>();
+        services.AddScoped<IModelService, ModelManager>();
         return services;
     }
 

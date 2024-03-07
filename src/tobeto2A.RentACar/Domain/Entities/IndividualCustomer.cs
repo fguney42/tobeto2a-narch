@@ -12,8 +12,9 @@ public class IndividualCustomer : Entity<Guid>
     public string LastName { get; set; }
     public string Email { set; get; }
     public string Password { set; get; }
-    public string NationalIdentity { get; set; }
+   public string NationalIdentity { get; set; }
     public IndividualCustomer()
     {
+        
     }
 }

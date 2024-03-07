@@ -1,5 +1,5 @@
-﻿using Application.Features.Brands.Commands.Create;
-using Application.Features.Brands.Queries;
+﻿//using Application.Features.Brands.Commands.Create;
+//using Application.Features.Brands.Queries;
 using Application.Features.IndividualCustomers.Commands;
 using Application.Features.IndividualCustomers.Queries;
 using Microsoft.AspNetCore.Http;

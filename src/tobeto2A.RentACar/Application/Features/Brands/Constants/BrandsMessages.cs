@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Brands.Constants;
-public static class BrandMessages
+public static class BrandsMessages
 {
-    public const string BrandNameNotExists = "Aynı isme sahip bir marka zaten mevcut";
+    public const string BrandNameAlreadyExists = "Aynı isme sahip bir marka zaten mevcut";
 }

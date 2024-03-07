@@ -14,10 +14,11 @@ public class BrandsController : BaseController
     [HttpPost]
     public async Task<IActionResult> Add([FromBody]CreateBrandCommand command)
     {
-        CreatedBrandResponse response = await Mediator.Send(command); 
+        CancellationToken token = new CancellationToken();
+        CreatedBrandResponse response = await Mediator.Send(command,token); 
         // Doğrudan bağımlılık azaltma // Handle CreateBrandCommandHandler.Handle() //
         return Created("",response);
-        // 201 Http Status Code returning  
+        // 201 Http Status Code returned // 
         // Urisiz VERİ KAYNAĞI NULL ayarladık
     }
     [HttpGet]
