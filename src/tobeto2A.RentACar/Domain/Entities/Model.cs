@@ -15,17 +15,17 @@ public class Model : Entity<Guid>
     public short Year { get; set; }
     public decimal DailyPrice { get; set; }
 
-    public Model()
-    {
-        Brand = null;
-        Fuel = null;
-        Transmission = null;
-        Cars = null;
-    }
-    public Brand? Brand { get; set; }
-    public Fuel? Fuel { get; set; }
-    public Transmission? Transmission { get; set; }       // Ef Gereksinimi //
-    public ICollection<Car>? Cars { get; set; }
+    //public Model()
+    //{
+    //    Brand = null;
+    //    Fuel = null;
+    //    Transmission = null;
+    //    Cars = null;
+    //}
+    //public Brand? Brand { get; set; }
+    //public Fuel? Fuel { get; set; }
+    //public Transmission? Transmission { get; set; }       // Ef Gereksinimi //
+    //public ICollection<Car>? Cars { get; set; }
 
     //public Model(Guid brandId, Guid fuelId, Guid transmissionId, string name, short year, decimal dailyPrice)
     //{

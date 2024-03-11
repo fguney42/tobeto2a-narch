@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using Application.Features.Brands.Constants;
 
 namespace Application.Features.Brands.Commands.Create;
-public class CreateBrandCommand : IRequest<CreatedBrandResponse>, ISecuredRequest, ILoggableRequest, IIntervalRequest
+public class CreateBrandCommand : IRequest<CreatedBrandResponse>, ISecuredRequest, ILoggableRequest, IIntervalRequest // 
 { // ADD C(rud) // Request Type() // // Handle??
     public string? Name { get; set; }
     public string? Logo { get; set; }
@@ -27,7 +27,8 @@ public class CreateBrandCommand : IRequest<CreatedBrandResponse>, ISecuredReques
     // Brand.Add // Brand.Delete // Brand.Update//
 
     // Inner Class
-    public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand,
+    public class CreateBrandCommandHandler : 
+        IRequestHandler<CreateBrandCommand,
         CreatedBrandResponse> // Web api'deki Mediator için //
     {
         private readonly IBrandRepository _brandRepository;
@@ -50,6 +51,7 @@ public class CreateBrandCommand : IRequest<CreatedBrandResponse>, ISecuredReques
             //cancellationTokenSource.Cancel();
             //await Task.Delay(5000);
             // Thread.Sleep() for sync version.//
+            Task.Delay(5000);
             await _brandBusinessRules.CarShouldNotExistsWithSameName(request.Name);
             Brand brand = _mapper.Map<Brand>(request); // Mappleme
             Brand addedBrand = await _brandRepository.AddAsync(brand); // Add //

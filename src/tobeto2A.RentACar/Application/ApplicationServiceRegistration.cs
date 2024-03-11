@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
 using Application.Services.UsersService;
@@ -19,6 +19,7 @@ using NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
+using Application.Services.Customers;
 //using Application.Services.Models;
 using NArchitecture.Core.Application.Pipelines.Performance;
 using System.Diagnostics;
@@ -40,11 +41,13 @@ public static class ApplicationServiceRegistration
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); // Services
-            configuration.AddOpenBehavior(typeof(PerformanceBehavior<,>));//
+            configuration.AddOpenBehavior(typeof(PerformanceBehavior<,>));
+            // Bunların handle metotu çalışacak istediği interface'leri implemente  ettiğimiz için.
+            //
             // Davranışlar birbirlerini next() olarak çağırır //
             configuration.AddOpenBehavior(typeof(LoggingBehavior<,>)); // Logging //
             configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>)); 
-            // Bunlara veri type'ını veren kısım neresi  IPipelineBehavior'dan Geliyor ??
+            // Bunlara veri type'ını veren implemente ettiğimiz class'lar veriyor.
             //  Implemente ettiğimizde bu configurasyonu yaptığımız için handle metotu çalışacak // ??
             configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
             configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
@@ -54,7 +57,7 @@ public static class ApplicationServiceRegistration
         });
 
         services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
-        // Assembly'den alıyor. Business Rules'den tureyenlerin Referansını oluştur. // Special Method //
+        // Assembly'den alıyor.Base Business Rules'den tureyenlerin Referansını oluştur. // Special Method //
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         //Validator'lerin Referansını oluşturuyor.
 
@@ -70,8 +73,11 @@ public static class ApplicationServiceRegistration
 
         services.AddSecurityServices<Guid, int>();
 
-        services.AddScoped<IModelService, ModelManager>();
-        services.AddScoped<IModelService, ModelManager>();
+        //services.AddScoped<IModelService, ModelManager>();
+        services.AddScoped<ICustomerService, CustomerManager>();
+
+
+
         return services;
     }
 

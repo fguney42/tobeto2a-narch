@@ -6,23 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-//public  class Customer : Entity<Guid>
-//{
-//    public Customer(IndividualCustomer customer)
-//    {
-//        IndividualCustomer = customer;
-//    }
-//    public Customer(CorporateCustomer customer)
-//    {
-//        CorporateCustomer = customer;
-//    }
-//    public Customer()
-//    {
-        
-//    }
-//    //public Guid UserId { get; set; }
-
-//    public CorporateCustomer CorporateCustomer { get; set; }
-//    public IndividualCustomer IndividualCustomer { get; set; }
-
-//}
+public class Customer : Entity<Guid>
+{
+    public string? CustomerNo { set; get; }
+    public Guid UserId { get; set; }
+    public virtual User? User { set; get; } // Field yapar isen sadece metotları kullanabilirsin//
+    public virtual IndividualCustomer? IndividualCustomer { set; get; }
+    public virtual CorporateCustomer? CorporateCustomer{ set; get; }
+    // Koleksiyon varsa constructor eklemelisin.//
+}

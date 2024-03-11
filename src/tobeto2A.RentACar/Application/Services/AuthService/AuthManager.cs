@@ -1,37 +1,42 @@
 ﻿using System.Collections.Immutable;
 using Application.Services.Repositories;
+using Application.Services.UsersService;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.Extensions.Configuration;
+using NArchitecture.Core.Application.Dtos;
+using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
 
 namespace Application.Services.AuthService;
 
 public class AuthManager : IAuthService
 {
+    
     private readonly IRefreshTokenRepository _refreshTokenRepository;
     private readonly ITokenHelper<Guid, int> _tokenHelper;
     private readonly TokenOptions _tokenOptions;
     private readonly IUserOperationClaimRepository _userOperationClaimRepository;
     private readonly IMapper _mapper;
+    private IUserService _userService;
 
     public AuthManager(
         IUserOperationClaimRepository userOperationClaimRepository,
         IRefreshTokenRepository refreshTokenRepository,
         ITokenHelper<Guid, int> tokenHelper,
         IConfiguration configuration,
-        IMapper mapper
-    )
+        IMapper mapper,
+    IUserService userService)
     {
         _userOperationClaimRepository = userOperationClaimRepository;
         _refreshTokenRepository = refreshTokenRepository;
         _tokenHelper = tokenHelper;
-
+        _userService = userService;
+        _mapper = mapper;
         const string tokenOptionsConfigurationSection = "TokenOptions";
         _tokenOptions =
             configuration.GetSection(tokenOptionsConfigurationSection).Get<TokenOptions>()
             ?? throw new NullReferenceException($"\"{tokenOptionsConfigurationSection}\" section cannot found in configuration");
-        _mapper = mapper;
     }
 
     public async Task<AccessToken> CreateAccessToken(User user)
@@ -110,5 +115,24 @@ public class AuthManager : IAuthService
         );
         RefreshToken refreshToken = _mapper.Map<RefreshToken>(coreRefreshToken);
         return Task.FromResult(refreshToken);
+    }
+
+    public async Task<User> Register(UserForRegisterDto request)
+    {
+        HashingHelper.CreatePasswordHash(
+            request.Password,
+            passwordHash: out byte[] passwordHash,
+            passwordSalt: out byte[] passwordSalt // define
+        );
+        User newUser =
+            new()
+            {
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+            };
+        User createdUser = await _userService.AddAsync(newUser);
+
+        return createdUser;
     }
 }

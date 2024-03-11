@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class CorporateCustomer : Entity<Guid>
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { set; get; }
-    public string Password { set; get; }
-    public string TaxNo { set; get; }
+    public string TaxNo { get; set; }
+
+    public Guid CustomerId { get; set; }
+    public virtual Customer Customer { get; set; }
+   public  string Email { set; get; }
     public CorporateCustomer()
     {
         

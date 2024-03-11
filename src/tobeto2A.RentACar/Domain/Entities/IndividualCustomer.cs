@@ -8,13 +8,10 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class IndividualCustomer : Entity<Guid>
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { set; get; }
-    public string Password { set; get; }
-   public string NationalIdentity { get; set; }
-    public IndividualCustomer()
-    {
-        
-    }
+
+    public string NationalityId { get; set; }
+    public Guid CustomerId { get; set; }
+    public virtual Customer Customer { get; set; }
+    public string Email{ get; set; }
+    // İlk Customer Ekle Sonra O Customer'dan id'yi al//
 }

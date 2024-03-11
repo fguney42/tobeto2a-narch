@@ -13,8 +13,6 @@ public class CreateCorporateCustomerValidator : AbstractValidator<CreateCorporat
         RuleFor(ccc => ccc.Password).NotEmpty().NotNull();
         RuleFor(ccc=>ccc.Email).NotNull().NotEmpty();
         RuleFor(ccc=>ccc.TaxNo).NotNull().NotEmpty();
-        RuleFor(ccc=>ccc.FirstName).NotEmpty().NotNull();
-        RuleFor(ccc=>ccc.LastName).NotEmpty().NotNull();
         return;
     }
 }

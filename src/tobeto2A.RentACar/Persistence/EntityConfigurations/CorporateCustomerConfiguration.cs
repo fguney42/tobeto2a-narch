@@ -1,18 +1,26 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.EntityConfigurations;
+
 public class CorporateCustomerConfiguration : IEntityTypeConfiguration<CorporateCustomer>
 {
     public void Configure(EntityTypeBuilder<CorporateCustomer> builder)
     {
-        builder.HasKey(i => i.Id);
-        builder.ToTable("CorporateCustomers");
+        builder.ToTable("CorporateCustomers").HasKey(cc => cc.Id);
+
+        builder.Property(cc => cc.Id).HasColumnName("Id").IsRequired();
+        builder.Property(cc => cc.TaxNo).HasColumnName("TaxNo");
+        builder.Property(cc => cc.CustomerId).HasColumnName("CustomerId");
+        builder.Property(cc => cc.CreatedDate).HasColumnName("CreatedDate").IsRequired();
+        builder.Property(cc => cc.UpdatedDate).HasColumnName("UpdatedDate");
+        builder.Property(cc => cc.DeletedDate).HasColumnName("DeletedDate");
+
+        builder.HasIndex(indexExpression: c => c.CustomerId, name: "CorporateCustomer_CustomerID_UK").IsUnique();
+
+        builder.HasOne(c => c.Customer);
+
+        builder.HasQueryFilter(cc => !cc.DeletedDate.HasValue);
     }
 }

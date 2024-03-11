@@ -1,12 +1,14 @@
 ﻿using System.Linq.Expressions;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore.Query;
+using NArchitecture.Core.Application.Dtos;
 using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Services.UsersService;
 
 public interface IUserService
 {
+
     Task<User?> GetAsync(
         Expression<Func<User, bool>> predicate,
         Func<IQueryable<User>, IIncludableQueryable<User, object>>? include = null,

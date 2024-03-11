@@ -1,9 +1,12 @@
 ﻿using System.Linq.Expressions;
+using Application.Features.Auth.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore.Query;
+using NArchitecture.Core.Application.Dtos;
 using NArchitecture.Core.Persistence.Paging;
+using NArchitecture.Core.Security.Hashing;
 
 namespace Application.Services.UsersService;
 
@@ -12,10 +15,12 @@ public class UserManager : IUserService
     private readonly IUserRepository _userRepository;
     private readonly UserBusinessRules _userBusinessRules;
 
+
     public UserManager(IUserRepository userRepository, UserBusinessRules userBusinessRules)
     {
         _userRepository = userRepository;
         _userBusinessRules = userBusinessRules;
+
     }
 
     public async Task<User?> GetAsync(
@@ -78,4 +83,5 @@ public class UserManager : IUserService
 
         return deletedUser;
     }
+   
 }
